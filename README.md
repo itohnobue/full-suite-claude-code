@@ -23,22 +23,6 @@ That's it. Open your project with Claude Code and the workflow activates automat
 
 > Tip: add `tmp/`, `.claude/knowledge.md`, and `.claude/session.md` to your project's `.gitignore` if you'd rather not commit memory files.
 
-## What's Included
-
-```
-.claude/
-├── agents/                 109 specialist .md files + INDEX.md
-└── tools/
-    ├── memory.sh           memory CLI (knowledge + session)
-    ├── memory.bat          Windows wrapper
-    ├── memory.py           memory implementation
-    ├── web_search.sh       web search CLI
-    ├── web_search.bat      Windows wrapper
-    ├── web_research.py     web search implementation (DuckDuckGo + Brave + topic sources)
-    └── completions/        bash, zsh, fish, PowerShell autocomplete
-CLAUDE.md                   the workflow Claude follows
-```
-
 ## Agents
 
 Browse `.claude/agents/INDEX.md` for the full directory grouped by domain. Quick reference:
@@ -126,76 +110,6 @@ Full details in [`CLAUDE.md`](CLAUDE.md).
 - **POSIX shell** (bash/zsh) on macOS/Linux, **PowerShell or cmd** on Windows. Both wrappers are included.
 
 No API keys or services required for the core suite. The web search tool uses public endpoints (DuckDuckGo, Brave, arXiv, etc.) — no key needed for typical use.
-
-## Custom Agents
-
-Add your own agent definitions to `.claude/agents/`:
-
-```markdown
----
-name: my-agent
-description: What this agent does and when to use it (used for selection by Claude).
-tools: Read, Write, Edit, Bash, Grep, Glob
----
-
-# My Agent
-
-You are a specialist in [domain].
-
-## Approach
-[How to handle tasks in this domain]
-
-## Common Pitfalls
-[What to watch out for]
-
-## Anti-Patterns
-[What NOT to do]
-```
-
-Then reference it from `CLAUDE.md` or just let Claude discover it via `INDEX.md` / glob.
-
-## Custom Skills
-
-Add project-specific multi-step workflows under `.claude/skills/<skill-name>/SKILL.md`. They become invokable as `/<skill-name>` in Claude Code. Use this for things like release procedures, deploy checklists, audit pipelines — anything you'd otherwise paste as a long prompt.
-
-## Project Structure
-
-```
-.claude/
-├── agents/                       109 specialist .md files
-│   ├── INDEX.md                  full directory, grouped by domain
-│   ├── python-pro.md
-│   ├── postgres-pro.md
-│   ├── code-reviewer.md
-│   ├── security-reviewer.md
-│   ├── debugger.md
-│   ├── web-searcher.md
-│   └── … (100+ more)
-└── tools/
-    ├── memory.sh                 entry point (POSIX)
-    ├── memory.bat                entry point (Windows)
-    ├── memory.py                 implementation
-    ├── web_search.sh             entry point (POSIX)
-    ├── web_search.bat            entry point (Windows)
-    ├── web_research.py           implementation
-    └── completions/
-        ├── memory.bash
-        ├── memory.zsh
-        ├── memory.fish
-        └── memory.ps1
-CLAUDE.md                         the workflow
-README.md
-LICENSE
-```
-
-## Components Maintained Separately
-
-This package bundles agents and tooling that are also maintained as standalone repositories. If you only need part of it:
-
-- **[ai-agents-claude-code](https://github.com/itohnobue/ai-agents-claude-code)** — the 108-agent library (no web-searcher, no workflow, no tools).
-- **[research-agent-claude-code](https://github.com/itohnobue/research-agent-claude-code)** — the web-searcher agent + `web_search.sh` tool, installable on its own.
-
-`full-suite-claude-code` is the integrated package: agents library + research agent + memory system + workflow CLAUDE.md, all in one drop-in directory.
 
 ## License
 
